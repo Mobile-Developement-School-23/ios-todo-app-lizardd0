@@ -107,12 +107,12 @@ extension TodoItem {
             dict["importance"] = "\(importance)"
         }
         
-        if deadline != nil {
-            dict["deadline"] = deadline?.timeIntervalSince1970
+        if let deadline = deadline {
+            dict["deadline"] = deadline.timeIntervalSince1970
         }
         
-        if changedate != nil {
-            dict["changedate"] = changedate?.timeIntervalSince1970
+        if let changedate = changedate {
+            dict["changedate"] = changedate.timeIntervalSince1970
         }
         
         return dict

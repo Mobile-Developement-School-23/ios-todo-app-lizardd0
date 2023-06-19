@@ -21,10 +21,13 @@ class FileCache {
         }
     }
     
-    func deleteitem(id: String) {
+    func deleteitem(id: String) -> TodoItem?{
+        var item: TodoItem? = nil
         if let findi = listofitems.firstIndex(where: {id == $0.id}) {
+            item = listofitems[findi]
             listofitems.remove(at: findi)
         }
+        return item
     }
     
     func readfromfileJSON(filename: String){
@@ -68,6 +71,7 @@ class FileCache {
                 array.append(item)
             }
         }
+        self.listofitems = array
     }
     
     func savetofileJSON(filename: String) {
@@ -88,37 +92,23 @@ class FileCache {
     }
     
     func readfromfileCSV(filename: String) {
-        var str = "id,text,importance,deadline,createdate,changedate" + "\n"
         let fileManager = FileManager.default
         let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let fileURL = documentsDirectory.appendingPathComponent("\(filename).csv")
-        var d: Data?
+       
         do {
-            d = try Data(contentsOf: fileURL)
-        } catch {
-            print("Ошибка получения Data: \(error.localizedDescription)")
-            return
-        }
-        
-        guard let data = d else {
-            print("Error! Невозможно распаковать data")
-            return
-        }
-        
-        if let csvstr = data as? String {
-            var csvarray = csvstr.components(separatedBy: "\n")
-            guard csvarray[0].components(separatedBy: ",").count == 7 else {
-                return
-            }
-            str = csvarray.removeFirst() + "\n"
             var array: [TodoItem] = []
-            for todoitem in  csvarray{
-                if let item  = TodoItem.parse(csv: todoitem) {
+            let csvarray = try String(contentsOf: fileURL).components(separatedBy: "\n")
+            for item in csvarray {
+                if let item  = TodoItem.parse(csv: item) {
                     array.append(item)
                 }
             }
-            
+            self.listofitems = array
+        } catch {
+            print("Ошибка получения Data: \(error.localizedDescription)")
         }
+        
     }
     
     
