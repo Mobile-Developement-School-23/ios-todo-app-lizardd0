@@ -19,7 +19,6 @@ class deleteButton: UIButton {
         backgroundColor = .tertiarySystemBackground
         heightAnchor.constraint(equalToConstant: 56).isActive = true
         isEnabled = false
-//        addTarget(self, action: #selector(deleteItem), for: .touchUpInside)
         translatesAutoresizingMaskIntoConstraints = false
     }
     

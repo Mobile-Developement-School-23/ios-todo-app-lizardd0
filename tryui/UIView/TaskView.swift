@@ -34,22 +34,10 @@ class TaskText: UITextView {
         isChanged = callback
     }
     
-    
-    func setText(text: String) {
-//        if text.isEmpty {
-//            textColor = .lightGray
-//            self.text = "Что нужно сделать?"
-//        } else {
-            textColor = .label
-            self.text = text
-//        }
-    }
-    
     func getText() -> String? {
         if textColor == .lightGray {
             return nil
         }
-        
         return text
     }
     

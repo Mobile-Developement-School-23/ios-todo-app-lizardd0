@@ -68,10 +68,10 @@ class MainViewController: UIViewController {
         
         if let item = readFromFile(filename: filename) {
             itemId = item.id
-            textOfTask.setText(text: item.text)
+            setText(text: item.text)
 
             setImportance(importanceCheck: item.importance)
-            deadline.setDeadlineDate(dateD: item.deadline)
+            setDeadlineDate(dateD: item.deadline)
             deleteBut.isEnabled = true
             navigationItem.rightBarButtonItem?.isEnabled = true
         } else {
@@ -81,8 +81,14 @@ class MainViewController: UIViewController {
         
         
     }
+   
+    private func setText(text: String) {
+        textOfTask.textColor = .label
+        textOfTask.text = text
+    }
     
-    func setImportance(importanceCheck: TodoItem.Importance) {
+    
+    private func setImportance(importanceCheck: TodoItem.Importance) {
         switch importanceCheck {
         case TodoItem.Importance.unimportant:
             importance.importanceSwitch.selectedSegmentIndex = 0
@@ -91,10 +97,26 @@ class MainViewController: UIViewController {
             importance.importanceSwitch.selectedSegmentIndex = 1
             importance.importance = TodoItem.Importance.ordinary
         case TodoItem.Importance.important:
-            importance.importanceSwitch.selectedSegmentIndex = 2 //все? Да!!!! ВАУУУУ!!
+            importance.importanceSwitch.selectedSegmentIndex = 2
             importance.importance = TodoItem.Importance.important
         }
     }
+    
+    
+    private func setDeadlineDate(dateD: Date?) {
+        if let deadlineDate = dateD {
+            deadline.date = deadlineDate
+            deadline.deadlineSwitch.isOn = true
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd MMMM yyyy"
+            deadline.deadlineButton.setTitle(formatter.string(from: deadline.date!), for: .normal)
+        } else {
+            deadline.deadlineSwitch.isOn = false
+            deadline.deadlineButton.setTitle("", for: .normal)
+        }
+    }
+    
     
     private func readFromFile(filename: String) -> TodoItem? {
         fileCache.readfromfileJSON(filename: filename)
@@ -128,9 +150,9 @@ class MainViewController: UIViewController {
             fileCache.savetofileJSON(filename: filename)
         }
         
-        textOfTask.setText(text: "")
-        importance.setImportance(importanceCheck: TodoItem.Importance.ordinary)
-        deadline.setDeadlineDate(dateD: nil)
+        setText(text: "")
+        setImportance(importanceCheck: TodoItem.Importance.ordinary)
+        setDeadlineDate(dateD: nil)
         if !deadline.line.isHidden{
             UIView.animate(withDuration: 0.5) {
                 self.deadline.line.isHidden = true

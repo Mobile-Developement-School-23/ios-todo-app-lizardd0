@@ -12,20 +12,6 @@ class ImportanceStack: UIStackView {
     var importance: TodoItem.Importance = TodoItem.Importance.ordinary
 
     var importanceSwitch: UISegmentedControl!
-//    var importanceSwitch: UISegmentedControl {
-//        let check = UISegmentedControl()
-//        let twoPoints = UIImage(systemName: "exclamationmark.2", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold))?.withTintColor(.red, renderingMode: .alwaysOriginal)
-//        check.insertSegment(with: UIImage(systemName: "arrow.down"), at: 0, animated: false)
-//        check.insertSegment(withTitle: "нет", at: 1, animated: false)
-//        check.insertSegment(with: twoPoints, at: 2, animated: false)
-//
-//        check.selectedSegmentIndex = 1
-//        check.widthAnchor.constraint(equalToConstant: 150).isActive = true
-//
-//        check.addTarget(self, action: #selector(changeSwitch), for: .valueChanged)
-//        check.translatesAutoresizingMaskIntoConstraints = false
-//        return check
-//    }
     
     private func getImportanceSwitch() -> UISegmentedControl {
         let check = UISegmentedControl()
@@ -63,20 +49,7 @@ class ImportanceStack: UIStackView {
         
         return label
     }()
-    
-    func setImportance(importanceCheck: TodoItem.Importance) {
-        switch importanceCheck {
-        case TodoItem.Importance.unimportant:
-            importanceSwitch.selectedSegmentIndex = 0
-            importance = TodoItem.Importance.unimportant
-        case TodoItem.Importance.ordinary:
-            importanceSwitch.selectedSegmentIndex = 1
-            importance = TodoItem.Importance.ordinary
-        case TodoItem.Importance.important:
-            importanceSwitch.selectedSegmentIndex = 2
-            importance = TodoItem.Importance.important
-        }
-    }
+
     
     func getImportance() -> TodoItem.Importance? {
         return importance

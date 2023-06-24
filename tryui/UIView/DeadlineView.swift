@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class deadlineStack: UIStackView {
-    private var date: Date? = nil
+    var date: Date? = nil
 
     
     func getDate() -> Date? {
@@ -25,19 +25,6 @@ class deadlineStack: UIStackView {
         return line
     }()
     
-    func setDeadlineDate(dateD: Date?) {
-        if let deadlineDate = dateD {
-            date = deadlineDate
-            deadlineSwitch.isOn = true
-            
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd MMMM yyyy"
-            deadlineButton.setTitle(formatter.string(from: date!), for: .normal)
-        } else {
-            deadlineSwitch.isOn = false
-            deadlineButton.setTitle("", for: .normal)
-        }
-    }
     
     let textLabel: UILabel = {
         let label = UILabel()

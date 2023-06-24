@@ -10,9 +10,6 @@ import UIKit
 
 
 class Stack: UIStackView {
-//    let text = TaskText()
-//    let importance = ImportanceStack()
-//    let deadline = deadlineStack()
     
     func configureLine() -> UIView {
         let line = UIView()
@@ -33,11 +30,6 @@ class Stack: UIStackView {
         directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 17, bottom: 12, trailing: 16)
         spacing = 10
         translatesAutoresizingMaskIntoConstraints = false
-        
-//        addArrangedSubview(text)
-//        addArrangedSubview(importance)
-//        addArrangedSubview(configureLine())
-//        addArrangedSubview(deadline)
     }
     
     required init(coder: NSCoder) {
