@@ -16,7 +16,7 @@
 		DF8A52552A447F70007EEEBC /* tryuiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A52542A447F70007EEEBC /* tryuiTests.swift */; };
 		DF8A525F2A447F70007EEEBC /* tryuiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A525E2A447F70007EEEBC /* tryuiUITests.swift */; };
 		DF8A52612A447F70007EEEBC /* tryuiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A52602A447F70007EEEBC /* tryuiUITestsLaunchTests.swift */; };
-		DF8A526F2A448558007EEEBC /* demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A526E2A448557007EEEBC /* demo.swift */; };
+		DF8A526F2A448558007EEEBC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A526E2A448557007EEEBC /* MainView.swift */; };
 		DF8A52742A44C68C007EEEBC /* FileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A52732A44C68C007EEEBC /* FileCache.swift */; };
 		DF8A52762A44C69A007EEEBC /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A52752A44C69A007EEEBC /* ToDoItem.swift */; };
 		DF8A52B42A45D59E007EEEBC /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A52B32A45D59E007EEEBC /* TaskView.swift */; };
@@ -24,6 +24,7 @@
 		DF8A52B82A45D5D4007EEEBC /* DeadlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A52B72A45D5D4007EEEBC /* DeadlineView.swift */; };
 		DF8A52BA2A45D5E4007EEEBC /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A52B92A45D5E4007EEEBC /* StackView.swift */; };
 		DF8A52BC2A45D622007EEEBC /* DeleteButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A52BB2A45D622007EEEBC /* DeleteButtonView.swift */; };
+		DF8A52BE2A4671FB007EEEBC /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A52BD2A4671FB007EEEBC /* ScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +58,7 @@
 		DF8A525A2A447F70007EEEBC /* tryuiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tryuiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF8A525E2A447F70007EEEBC /* tryuiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tryuiUITests.swift; sourceTree = "<group>"; };
 		DF8A52602A447F70007EEEBC /* tryuiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tryuiUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		DF8A526E2A448557007EEEBC /* demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demo.swift; sourceTree = "<group>"; };
+		DF8A526E2A448557007EEEBC /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		DF8A52732A44C68C007EEEBC /* FileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
 		DF8A52752A44C69A007EEEBC /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		DF8A52B32A45D59E007EEEBC /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
@@ -65,6 +66,7 @@
 		DF8A52B72A45D5D4007EEEBC /* DeadlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineView.swift; sourceTree = "<group>"; };
 		DF8A52B92A45D5E4007EEEBC /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		DF8A52BB2A45D622007EEEBC /* DeleteButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButtonView.swift; sourceTree = "<group>"; };
+		DF8A52BD2A4671FB007EEEBC /* ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,12 +150,13 @@
 		DF8A526D2A44853B007EEEBC /* UIView */ = {
 			isa = PBXGroup;
 			children = (
-				DF8A526E2A448557007EEEBC /* demo.swift */,
+				DF8A526E2A448557007EEEBC /* MainView.swift */,
 				DF8A52B32A45D59E007EEEBC /* TaskView.swift */,
 				DF8A52B52A45D5B8007EEEBC /* ImportanceView.swift */,
 				DF8A52B72A45D5D4007EEEBC /* DeadlineView.swift */,
 				DF8A52B92A45D5E4007EEEBC /* StackView.swift */,
 				DF8A52BB2A45D622007EEEBC /* DeleteButtonView.swift */,
+				DF8A52BD2A4671FB007EEEBC /* ScrollView.swift */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -303,9 +306,10 @@
 				DF8A52B42A45D59E007EEEBC /* TaskView.swift in Sources */,
 				DF8A52BC2A45D622007EEEBC /* DeleteButtonView.swift in Sources */,
 				DF8A523E2A447F6F007EEEBC /* AppDelegate.swift in Sources */,
+				DF8A52BE2A4671FB007EEEBC /* ScrollView.swift in Sources */,
 				DF8A52762A44C69A007EEEBC /* ToDoItem.swift in Sources */,
 				DF8A52B62A45D5B8007EEEBC /* ImportanceView.swift in Sources */,
-				DF8A526F2A448558007EEEBC /* demo.swift in Sources */,
+				DF8A526F2A448558007EEEBC /* MainView.swift in Sources */,
 				DF8A52742A44C68C007EEEBC /* FileCache.swift in Sources */,
 				DF8A52402A447F6F007EEEBC /* SceneDelegate.swift in Sources */,
 				DF8A52BA2A45D5E4007EEEBC /* StackView.swift in Sources */,

@@ -11,8 +11,8 @@ import UIKit
 
 class Stack: UIStackView {
 //    let text = TaskText()
-    let importance = ImportanceStack()
-    let deadline = deadlineStack()
+//    let importance = ImportanceStack()
+//    let deadline = deadlineStack()
     
     func configureLine() -> UIView {
         let line = UIView()
@@ -35,9 +35,9 @@ class Stack: UIStackView {
         translatesAutoresizingMaskIntoConstraints = false
         
 //        addArrangedSubview(text)
-        addArrangedSubview(importance)
-        addArrangedSubview(configureLine())
-        addArrangedSubview(deadline)
+//        addArrangedSubview(importance)
+//        addArrangedSubview(configureLine())
+//        addArrangedSubview(deadline)
     }
     
     required init(coder: NSCoder) {

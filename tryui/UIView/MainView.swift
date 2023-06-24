@@ -1,5 +1,5 @@
 //
-//  demo.swift
+//  MainView.swift
 //  tryui
 //
 //  Created by Елизавета Шерман on 22.06.2023.
@@ -8,7 +8,7 @@
 import UIKit
 
 
-class demoViewController: UIViewController {
+class MainViewController: UIViewController {
     let filename = "name"
     private let fileCache = FileCache()
     private var textOfTask = TaskText()
@@ -16,6 +16,8 @@ class demoViewController: UIViewController {
     private var deleteBut = deleteButton()
     private var itemId: String? = nil
     private var scrollView = ScrollView()
+    private var importance = ImportanceStack()
+    private var deadline = deadlineStack()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,10 @@ class demoViewController: UIViewController {
         line.backgroundColor = .lightGray
         line.translatesAutoresizingMaskIntoConstraints = false
         self.setNavigationBar()
+        
+        stack.addArrangedSubview(importance)
+        stack.addArrangedSubview(stack.configureLine())
+        stack.addArrangedSubview(deadline)
         
         deleteBut.addTarget(self, action: #selector(deleteItem), for: .touchUpInside)
         
@@ -63,9 +69,9 @@ class demoViewController: UIViewController {
         if let item = readFromFile(filename: filename) {
             itemId = item.id
             textOfTask.setText(text: item.text)
-            stack.importance.setImportance(importanceCheck: item.importance)
-//            print(stack.importance.getImportance())
-            stack.deadline.setDeadlineDate(dateD: item.deadline)
+
+            setImportance(importanceCheck: item.importance)
+            deadline.setDeadlineDate(dateD: item.deadline)
             deleteBut.isEnabled = true
             navigationItem.rightBarButtonItem?.isEnabled = true
         } else {
@@ -74,6 +80,20 @@ class demoViewController: UIViewController {
         
         
         
+    }
+    
+    func setImportance(importanceCheck: TodoItem.Importance) {
+        switch importanceCheck {
+        case TodoItem.Importance.unimportant:
+            importance.importanceSwitch.selectedSegmentIndex = 0
+            importance.importance = TodoItem.Importance.unimportant
+        case TodoItem.Importance.ordinary:
+            importance.importanceSwitch.selectedSegmentIndex = 1
+            importance.importance = TodoItem.Importance.ordinary
+        case TodoItem.Importance.important:
+            importance.importanceSwitch.selectedSegmentIndex = 2 //все? Да!!!! ВАУУУУ!!
+            importance.importance = TodoItem.Importance.important
+        }
     }
     
     private func readFromFile(filename: String) -> TodoItem? {
@@ -88,8 +108,8 @@ class demoViewController: UIViewController {
 
     @objc private func saveToFile() {
         if let text = textOfTask.getText(),
-           let importance = stack.importance.getImportance() {
-            let deadline:Date? = stack.deadline.getDate()
+           let importance = importance.getImportance() {
+            let deadline:Date? = deadline.getDate()
             let item: TodoItem
             if let id = itemId {
                 item = TodoItem(id: id, text: text, importance: importance, deadline: deadline)
@@ -109,12 +129,12 @@ class demoViewController: UIViewController {
         }
         
         textOfTask.setText(text: "")
-        stack.importance.setImportance(importanceCheck: TodoItem.Importance.ordinary)
-        stack.deadline.setDeadlineDate(dateD: nil)
-        if !stack.deadline.line.isHidden{
+        importance.setImportance(importanceCheck: TodoItem.Importance.ordinary)
+        deadline.setDeadlineDate(dateD: nil)
+        if !deadline.line.isHidden{
             UIView.animate(withDuration: 0.5) {
-                self.stack.deadline.line.isHidden = true
-                self.stack.deadline.calendar.isHidden = true
+                self.deadline.line.isHidden = true
+                self.deadline.calendar.isHidden = true
             }
         }
         deleteBut.isEnabled = false
@@ -138,16 +158,3 @@ class demoViewController: UIViewController {
     
 }
 
-
-class ScrollView: UIScrollView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        backgroundColor = .systemGroupedBackground
-        translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}

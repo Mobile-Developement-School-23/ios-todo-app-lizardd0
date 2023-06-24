@@ -9,9 +9,25 @@ import Foundation
 import UIKit
 
 class ImportanceStack: UIStackView {
-    private var importance: TodoItem.Importance = TodoItem.Importance.ordinary
+    var importance: TodoItem.Importance = TodoItem.Importance.ordinary
 
-    var importanceSwitch: UISegmentedControl {
+    var importanceSwitch: UISegmentedControl!
+//    var importanceSwitch: UISegmentedControl {
+//        let check = UISegmentedControl()
+//        let twoPoints = UIImage(systemName: "exclamationmark.2", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold))?.withTintColor(.red, renderingMode: .alwaysOriginal)
+//        check.insertSegment(with: UIImage(systemName: "arrow.down"), at: 0, animated: false)
+//        check.insertSegment(withTitle: "нет", at: 1, animated: false)
+//        check.insertSegment(with: twoPoints, at: 2, animated: false)
+//
+//        check.selectedSegmentIndex = 1
+//        check.widthAnchor.constraint(equalToConstant: 150).isActive = true
+//
+//        check.addTarget(self, action: #selector(changeSwitch), for: .valueChanged)
+//        check.translatesAutoresizingMaskIntoConstraints = false
+//        return check
+//    }
+    
+    private func getImportanceSwitch() -> UISegmentedControl {
         let check = UISegmentedControl()
         let twoPoints = UIImage(systemName: "exclamationmark.2", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold))?.withTintColor(.red, renderingMode: .alwaysOriginal)
         check.insertSegment(with: UIImage(systemName: "arrow.down"), at: 0, animated: false)
@@ -69,6 +85,7 @@ class ImportanceStack: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        importanceSwitch = getImportanceSwitch()
         backgroundColor = .clear
         layer.cornerRadius = 16
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
