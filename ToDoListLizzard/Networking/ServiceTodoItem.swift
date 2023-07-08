@@ -42,55 +42,6 @@ struct ServiceTodoIem: Codable {
         case changedate = "changed_at"
         case lastupdatedby = "last_updated_by"
     }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.id, forKey: .id)
-        try container.encode(self.text, forKey: .text)
-        var imp: String = ""
-        switch self.importance {
-        case TodoItem.Importance.unimportant.rawValue:
-            imp = "low"
-        case TodoItem.Importance.ordinary.rawValue:
-            imp = "basic"
-        case TodoItem.Importance.important.rawValue:
-            imp = "important"
-        default:
-            break
-        }
-        try container.encode(imp, forKey: .importance)
-        try container.encodeIfPresent(self.deadline, forKey: .deadline)
-        try container.encode(self.flag, forKey: .flag)
-        try container.encodeIfPresent(self.color, forKey: .color)
-        try container.encode(self.createdate, forKey: .createdate)
-        try container.encodeIfPresent(self.changedate, forKey: .changedate)
-        try container.encode(self.lastupdatedby, forKey: .lastupdatedby)
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(String.self, forKey: .id)
-        self.text = try container.decode(String.self, forKey: .text)
-        let baseImportance = try container.decode(String.self, forKey: .importance)
-        var newImportance = TodoItem.Importance.ordinary
-        switch baseImportance {
-        case "low":
-            newImportance = TodoItem.Importance.unimportant
-        case "basic":
-            newImportance = TodoItem.Importance.ordinary
-        case "important":
-            newImportance = TodoItem.Importance.important
-        default:
-            break
-        }
-        self.importance = newImportance.rawValue
-        self.deadline = try container.decodeIfPresent(Int.self, forKey: .deadline)
-        self.flag = try container.decode(Bool.self, forKey: .flag)
-        self.color = try container.decodeIfPresent(String.self, forKey: .color)
-        self.createdate = try container.decode(Int.self, forKey: .createdate)
-        self.changedate = try container.decode(Int.self, forKey: .changedate)
-        self.lastupdatedby = try container.decode(String.self, forKey: .lastupdatedby)
-    }
 }
 
 struct ResponseList: Codable {
