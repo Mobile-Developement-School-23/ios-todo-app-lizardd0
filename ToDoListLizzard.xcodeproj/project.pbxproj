@@ -33,7 +33,10 @@
 		DF254A572A4FE22F00208504 /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DF254A562A4FE22F00208504 /* CocoaLumberjackSwift */; };
 		DF254A592A4FE22F00208504 /* CocoaLumberjackSwiftLogBackend in Frameworks */ = {isa = PBXBuildFile; productRef = DF254A582A4FE22F00208504 /* CocoaLumberjackSwiftLogBackend */; };
 		DF254A5C2A4FE52300208504 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = DF254A5B2A4FE52300208504 /* .swiftlint.yml */; };
+<<<<<<< HEAD
 		DF6518212A573E36005AA4D6 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6518202A573E36005AA4D6 /* URLSession.swift */; };
+=======
+>>>>>>> main
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +90,10 @@
 		DF254A4F2A4FE1B600208504 /* DeleteButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButtonView.swift; sourceTree = "<group>"; };
 		DF254A512A4FE1CE00208504 /* DeadlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineView.swift; sourceTree = "<group>"; };
 		DF254A5B2A4FE52300208504 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		DF6518202A573E36005AA4D6 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+=======
+>>>>>>> main
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +176,10 @@
 		DF254A0C2A4FE07E00208504 /* ToDoListLizzard */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				DF65181F2A573E1C005AA4D6 /* Service */,
+=======
+>>>>>>> main
 				DF254A3E2A4FE0AD00208504 /* UIView */,
 				DF254A3D2A4FE09B00208504 /* Domain */,
 				DF254A0D2A4FE07E00208504 /* AppDelegate.swift */,
@@ -225,6 +234,7 @@
 			path = UIView;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
 		DF65181F2A573E1C005AA4D6 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +243,8 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+=======
+>>>>>>> main
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -471,7 +483,10 @@
 				DF254A442A4FE12500208504 /* TextView.swift in Sources */,
 				DF254A482A4FE15B00208504 /* ListOfItemsViewController.swift in Sources */,
 				DF254A4E2A4FE1A300208504 /* HeaderView.swift in Sources */,
+<<<<<<< HEAD
 				DF6518212A573E36005AA4D6 /* URLSession.swift in Sources */,
+=======
+>>>>>>> main
 				DF254A522A4FE1CE00208504 /* DeadlineView.swift in Sources */,
 				DF254A422A4FE0EA00208504 /* FileCache.swift in Sources */,
 				DF254A462A4FE14000208504 /* TaskViewControll.swift in Sources */,
