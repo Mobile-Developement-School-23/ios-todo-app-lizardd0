@@ -33,6 +33,10 @@
 		DF254A572A4FE22F00208504 /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DF254A562A4FE22F00208504 /* CocoaLumberjackSwift */; };
 		DF254A592A4FE22F00208504 /* CocoaLumberjackSwiftLogBackend in Frameworks */ = {isa = PBXBuildFile; productRef = DF254A582A4FE22F00208504 /* CocoaLumberjackSwiftLogBackend */; };
 		DF254A5C2A4FE52300208504 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = DF254A5B2A4FE52300208504 /* .swiftlint.yml */; };
+		DF6518212A573E36005AA4D6 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6518202A573E36005AA4D6 /* URLSession.swift */; };
+		DF6518242A5841FD005AA4D6 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6518232A5841FD005AA4D6 /* NetworkingService.swift */; };
+		DF6518272A58430E005AA4D6 /* ServiceTodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6518262A58430E005AA4D6 /* ServiceTodoItem.swift */; };
+		DF6518292A5846EE005AA4D6 /* DefaultNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6518282A5846EE005AA4D6 /* DefaultNetworkingService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +90,10 @@
 		DF254A4F2A4FE1B600208504 /* DeleteButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButtonView.swift; sourceTree = "<group>"; };
 		DF254A512A4FE1CE00208504 /* DeadlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineView.swift; sourceTree = "<group>"; };
 		DF254A5B2A4FE52300208504 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		DF6518202A573E36005AA4D6 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+		DF6518232A5841FD005AA4D6 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
+		DF6518262A58430E005AA4D6 /* ServiceTodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTodoItem.swift; sourceTree = "<group>"; };
+		DF6518282A5846EE005AA4D6 /* DefaultNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkingService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +176,8 @@
 		DF254A0C2A4FE07E00208504 /* ToDoListLizzard */ = {
 			isa = PBXGroup;
 			children = (
+				DF6518222A583CC9005AA4D6 /* Networking */,
+				DF65181F2A573E1C005AA4D6 /* Service */,
 				DF254A3E2A4FE0AD00208504 /* UIView */,
 				DF254A3D2A4FE09B00208504 /* Domain */,
 				DF254A0D2A4FE07E00208504 /* AppDelegate.swift */,
@@ -220,6 +230,24 @@
 				DF254A512A4FE1CE00208504 /* DeadlineView.swift */,
 			);
 			path = UIView;
+			sourceTree = "<group>";
+		};
+		DF65181F2A573E1C005AA4D6 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				DF6518202A573E36005AA4D6 /* URLSession.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		DF6518222A583CC9005AA4D6 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				DF6518232A5841FD005AA4D6 /* NetworkingService.swift */,
+				DF6518262A58430E005AA4D6 /* ServiceTodoItem.swift */,
+				DF6518282A5846EE005AA4D6 /* DefaultNetworkingService.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,15 +480,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF6518242A5841FD005AA4D6 /* NetworkingService.swift in Sources */,
 				DF254A122A4FE07E00208504 /* ViewController.swift in Sources */,
 				DF254A0E2A4FE07E00208504 /* AppDelegate.swift in Sources */,
 				DF254A4C2A4FE18E00208504 /* ImportanceView.swift in Sources */,
 				DF254A4A2A4FE16F00208504 /* ItemCell.swift in Sources */,
 				DF254A402A4FE0C400208504 /* TodoItem.swift in Sources */,
+				DF6518272A58430E005AA4D6 /* ServiceTodoItem.swift in Sources */,
 				DF254A442A4FE12500208504 /* TextView.swift in Sources */,
 				DF254A482A4FE15B00208504 /* ListOfItemsViewController.swift in Sources */,
 				DF254A4E2A4FE1A300208504 /* HeaderView.swift in Sources */,
+				DF6518212A573E36005AA4D6 /* URLSession.swift in Sources */,
 				DF254A522A4FE1CE00208504 /* DeadlineView.swift in Sources */,
+				DF6518292A5846EE005AA4D6 /* DefaultNetworkingService.swift in Sources */,
 				DF254A422A4FE0EA00208504 /* FileCache.swift in Sources */,
 				DF254A462A4FE14000208504 /* TaskViewControll.swift in Sources */,
 				DF254A102A4FE07E00208504 /* SceneDelegate.swift in Sources */,
@@ -657,6 +689,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "-.ToDoListLizzard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -685,6 +718,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "-.ToDoListLizzard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

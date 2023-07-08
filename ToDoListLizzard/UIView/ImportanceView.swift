@@ -46,7 +46,7 @@ class ImportanceStack: UIStackView {
     }
     
     @objc func importanceTapped(importanceCheck: UISegmentedControl) {
-        switch importanceCheck.selectedSegmentIndex{
+        switch importanceCheck.selectedSegmentIndex {
         case 0:
             importance = TodoItem.Importance.unimportant
         case 1:

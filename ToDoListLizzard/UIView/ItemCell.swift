@@ -19,7 +19,7 @@ class ItemCell: UITableViewCell {
     weak var delegate: ButtonFlagTapped?
     
     var row = 0
-    var flag: UIButton = {
+    lazy var flag: UIButton = {
         let flag = UIButton()
         flag.setBackgroundImage(UIImage(systemName: "circle"), for: .normal)
         flag.addTarget(self, action: #selector(done), for: .touchUpInside)

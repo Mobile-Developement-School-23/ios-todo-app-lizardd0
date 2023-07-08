@@ -21,7 +21,7 @@ class FileCache {
         }
     }
     
-    func deleteitem(id: String){
+    func deleteitem(id: String) {
         if let index = listofitems.map({$0.id}).firstIndex(of: id) {
             listofitems.remove(at: index)
         }
@@ -44,10 +44,9 @@ class FileCache {
             return
         }
         
-        var dictionary: [String:Any] = [:]
+        var dictionary: [String: Any] = [:]
         do {
-            guard let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] else
-            {
+            guard let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
                 print("Error! Невозможно преобразовать данные")
                 return
             }
@@ -57,7 +56,7 @@ class FileCache {
             return
         }
         
-        guard let todoitemsarray = dictionary["ToDoItem"] as? [[String:Any]] else {
+        guard let todoitemsarray = dictionary["ToDoItem"] as? [[String: Any]] else {
             print("Error! Невозможно преобразовать данные")
             return
         }
@@ -80,7 +79,7 @@ class FileCache {
             array.append(item.json)
         }
         do {
-            let dict: [String:Any] = ["ToDoItem": array]
+            let dict: [String: Any] = ["ToDoItem": array]
             let data = try JSONSerialization.data(withJSONObject: dict, options: [.prettyPrinted])
             try data.write(to: fileURL)
         } catch {
@@ -127,4 +126,14 @@ class FileCache {
         }
     }
     
+    
+    public func deleteAll() {
+        listofitems.removeAll()
+    }
+    
+    public func updateAllItems(with items: [TodoItem]){
+        for item in items{
+            listofitems.append(item)
+        }
+    }
 }
