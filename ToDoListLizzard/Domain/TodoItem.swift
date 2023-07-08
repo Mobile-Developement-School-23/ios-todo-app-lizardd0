@@ -7,16 +7,16 @@
 
 import Foundation
 struct TodoItem {
-    let id : String
+    let id: String
     let text: String
-    let importance : Importance
-    let deadline : Date?
-    var flag : Bool
-    let createdate : Date
-    let changedate : Date?
+    let importance: Importance
+    let deadline: Date?
+    var flag: Bool
+    let createdate: Date
+    let changedate: Date?
     static let splitter: String = ","
 
-    enum Importance: Int {
+    enum Importance: String {
         case unimportant
         case important
         case ordinary
@@ -95,11 +95,11 @@ extension TodoItem {
     
     
     var json: Any {
-        var dict: [String:Any] = [
-            "id" : id,
-            "text" : text,
-            "flag" : flag,
-            "createdate" : createdate.timeIntervalSince1970
+        var dict: [String: Any] = [
+            "id": id,
+            "text": text,
+            "flag": flag,
+            "createdate": createdate.timeIntervalSince1970
         ]
         
         if importance != Importance.ordinary {
@@ -120,9 +120,8 @@ extension TodoItem {
     static func parse(csv: String) -> TodoItem? {
             let csvstring = csv.components(separatedBy: TodoItem.splitter)
             
-            if csvstring.count == 7, csvstring[0] != "" , csvstring[1] != "",
-                let createdate = Double(csvstring[5])
-            {
+            if csvstring.count == 7, csvstring[0] != "", csvstring[1] != "",
+                let createdate = Double(csvstring[5]) {
                 let createdatecsv = Date(timeIntervalSince1970: createdate)
                 
                 let deadlinecsv: Date?

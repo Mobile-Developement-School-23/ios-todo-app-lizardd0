@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol TaskViewControllerDelegate: AnyObject {
-    func reloadDataForTable(flag: Bool)
+    func reloadDataForTable(flag: Bool, item: TodoItem, action: String)
 }
 
 
@@ -149,7 +149,7 @@ class TaskViewController: UIViewController {
         self.navigationItem.title = "Дело"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(cancelTapped))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveTapped))
-        let attributes: [NSAttributedString.Key : Any] = [.font: UIFont.boldSystemFont(ofSize: 17)]
+        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 17)]
         navigationItem.rightBarButtonItem?.setTitleTextAttributes(attributes, for: .normal)
     }
     
@@ -246,10 +246,10 @@ class TaskViewController: UIViewController {
     }
     
     @objc func deleteItem() {
-        if let id = item?.id {
-            fileCache.deleteitem(id: id)
+        if let delItem = item {
+            fileCache.deleteitem(id: delItem.id)
             fileCache.savetofileJSON(filename: filename)
-            self.delegate?.reloadDataForTable(flag: true)
+            self.delegate?.reloadDataForTable(flag: true, item: delItem, action: "delete")
         }
         dismiss(animated: true, completion: nil)
     }
@@ -277,18 +277,21 @@ class TaskViewController: UIViewController {
             default: importance = TodoItem.Importance.ordinary
             }
             
-            let deadline:Date? = deadlineStack.getDate()
+            let deadline: Date? = deadlineStack.getDate()
             var newItem: TodoItem
+            var str: String
             if let item = item {
                 newItem = TodoItem(id: item.id, text: text, importance: importance, deadline: deadline)
+                str = "change"
             } else {
                 newItem = TodoItem(id: UUID().uuidString, text: text, importance: importance, deadline: deadline)
+                str = "save"
             }
             
             fileCache.additem(item: newItem)
             fileCache.savetofileJSON(filename: filename)
             navigationItem.rightBarButtonItem?.isEnabled = false
-            self.delegate?.reloadDataForTable(flag: true)
+            self.delegate?.reloadDataForTable(flag: true, item: newItem, action: str)
         }
     }
     

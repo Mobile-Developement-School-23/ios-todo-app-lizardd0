@@ -51,8 +51,7 @@ class Header: UIView {
             
             buttonShow.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             buttonShow.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            buttonShow.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
-            
+            buttonShow.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12)
         ])
     }
     

@@ -15,6 +15,10 @@ class ListOfToDoController: UIViewController, UITableViewDelegate {
     let headerView = Header()
     private var listofitems = [TodoItem]()
     private lazy var tableView = UITableView(frame: .zero, style: .insetGrouped)
+    let networking = DefaultNetworkingService()
+    let converter = Converter()
+    
+    private var isDirty = false
     enum ShowOrHide {
         case show // нажата кнопка показать - видим все элементы
         case hide // нажали кнопку скрыть - видим только несделанные дела
@@ -22,8 +26,8 @@ class ListOfToDoController: UIViewController, UITableViewDelegate {
     private var isShow = ShowOrHide.show
     override func viewDidLoad() {
         super.viewDidLoad()
-        fileCache.readfromfileJSON(filename: filename)
-        listofitems = fileCache.listofitems
+        
+        loadFromService()
         view.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.95, alpha: 1.0)
         self.navigationItem.title = "Мои дела"
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -48,7 +52,7 @@ class ListOfToDoController: UIViewController, UITableViewDelegate {
             plusButton.heightAnchor.constraint(equalToConstant: 44),
             plusButton.widthAnchor.constraint(equalToConstant: 44),
             plusButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            plusButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -54),
+            plusButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -54)
         ])
     }
     @objc private func editingTask() {
@@ -57,14 +61,21 @@ class ListOfToDoController: UIViewController, UITableViewDelegate {
         rootController.delegate = self
         present(navigationController, animated: true)
     }
-    private func readFromFile(filename: String) -> [TodoItem]? {
-        fileCache.readfromfileJSON(filename: filename)
-        if fileCache.listofitems.count > 0 {
-            return fileCache.listofitems
-        } else {
-            return nil
+    
+    private func loadFromService() {
+        Task {
+            do {
+                let todoitems = try await networking.getFromServer()
+                fileCache.deleteAll()
+                fileCache.updateAllItems(with: todoitems)
+                fileCache.savetofileJSON(filename: filename)
+                listofitems = todoitems
+                tableView.reloadData()
+            }
         }
     }
+
+    
     private func setTableView() {
         tableView.register(ItemCell.self, forCellReuseIdentifier: "\(ItemCell.self)")
         tableView.dataSource = self
@@ -217,8 +228,54 @@ extension ListOfToDoController: UITableViewDataSource {
 
 
 extension ListOfToDoController: TaskViewControllerDelegate {
-    func reloadDataForTable(flag: Bool) {
+    func reloadDataForTable(flag: Bool, item: TodoItem, action: String) {
         listofitems = fileCache.listofitems
+        isDirty = true
+//        tableView.reloadData()
+        if action == "save" {
+            // сохраняем новый айтем
+            if networking.isDirty {
+                Task {
+                    let list = try await networking.updateDataOnServer(items: listofitems)
+                    fileCache.deleteAll()
+                    fileCache.updateAllItems(with: listofitems)
+                    fileCache.savetofileJSON(filename: filename)
+                }
+                networking.isDirty = false
+            }
+            Task {
+                try await networking.postRequest(item: item)
+            }
+//            listofitems = fileCache.listofitems
+        } else if action == "change" {
+            // меняем айтем
+            if networking.isDirty {
+                Task {
+                    let list = try await networking.updateDataOnServer(items: listofitems)
+                    fileCache.deleteAll()
+                    fileCache.updateAllItems(with: listofitems)
+                    fileCache.savetofileJSON(filename: filename)
+                }
+                networking.isDirty = false
+            }
+            Task {
+                try await networking.putRequest(item: item)
+            }
+        } else {
+            // удаляем айтем
+            if networking.isDirty {
+                Task {
+                    let list = try await networking.updateDataOnServer(items: listofitems)
+                    fileCache.deleteAll()
+                    fileCache.updateAllItems(with: listofitems)
+                    fileCache.savetofileJSON(filename: filename)
+                }
+                networking.isDirty = false
+            }
+            Task {
+                try await networking.deleteRequest(item: item)
+            }
+        }
         tableView.reloadData()
     }
 }
@@ -228,6 +285,7 @@ extension ListOfToDoController: IsShowOrHide {
         if !flag {
             isShow = .show
             listofitems = fileCache.listofitems
+//            loadFromService()
         } else {
             isShow = .hide
             listofitems = fileCache.listofitems.filter({$0.flag == false})
@@ -250,6 +308,18 @@ extension ListOfToDoController: ButtonFlagTapped {
         listofitems.insert(newitem, at: rowInSection)
         fileCache.savetofileJSON(filename: filename)
         let num = fileCache.listofitems.filter({$0.flag == true}).count
+        if networking.isDirty {
+            Task {
+                let list = try await networking.updateDataOnServer(items: listofitems)
+                fileCache.deleteAll()
+                fileCache.updateAllItems(with: listofitems)
+                fileCache.savetofileJSON(filename: filename)
+            }
+            networking.isDirty = false
+        }
+        Task {
+            try await networking.putRequest(item: newitem)
+        }
         headerView.labelNumberOfDone.text = "Выполнено - \(num)"
         headerView.configure(delegate: self)
         tableView.reloadData()
